@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>POC</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+      function saveFile() {
+          var name = $("#name").val();
+          var password = $("#password").val();
+          var emailid = $("#emailid").val();
+          var sendInfo = {
+            name: name,
+            password: password,
+            emailid: emailid
+          };
+          $.post("http://localhost:4000/signupsave",{name: name,password: password,emailid:emailid}, function(data){
+            if(data==='done') {
+                  window.location="/"
+                } else {
+                  $('#lblResponse').html('Can not connect to server');
+                }
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <div class="login-page">
+      <div class="form">
+        <p class="register-form">
+          <input type="text" name="name" id="name" placeholder="username" required="required"/>
+          <input type="password" name="password" id="password" placeholder="password" required="required"/>
+          <input type="text" name="emailid" id="emailid" placeholder="email address" required/>
+          <button onclick="saveFile();">create</button>
+          <p class="message">Already registered? <a href="index">Sign In</a></p>
+        </p>
+        <span id="lblResponse"></span>
+      </div>
+    </div>
+
+  </body>
+</html>
